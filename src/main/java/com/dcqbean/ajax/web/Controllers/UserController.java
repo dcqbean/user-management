@@ -1,5 +1,6 @@
 package com.dcqbean.ajax.web.Controllers;
 
+import com.dcqbean.ajax.web.dao.models.User;
 import com.dcqbean.ajax.web.dto.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,29 @@ public class UserController {
     public ModelAndView login(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
-        mav.addObject("user", new UserDTO());// Object user biding data
+        mav.addObject("user", new User());// Object user biding data
         return mav;
     }
 
     @PostMapping(value = "/login-process")
-    public ModelAndView loginProcess(UserDTO userDTO){
-        System.out.println(userDTO);//Print user
+    public ModelAndView loginProcess(User user){
+        System.out.println(user);//Print user
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/");// Redirect to home
+        return mav;
+    }
+
+    @GetMapping(value = "/register")
+    public ModelAndView register(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("register");
+        mav.addObject("user",new User());
+        return mav;
+    }
+
+    @PostMapping(value = "/register-process")
+    public ModelAndView registerProcess(User user) {
+        System.out.println(user);//Print user
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/");// Redirect to home
         return mav;
